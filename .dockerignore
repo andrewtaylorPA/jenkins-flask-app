@@ -1,0 +1,6 @@
+#Ignore all txt files
+*.txt
+nginx.conf
+
+# Except requiresments.txt as that is required in the build
+!requirements.txt
