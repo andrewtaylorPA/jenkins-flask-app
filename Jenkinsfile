@@ -14,14 +14,14 @@ pipeline {
     stage ('Build') {
       steps {
         script {
-         sh './buildstage.sh'
+         //sh './buildstage.sh'
         }
       }
     }
 // 2 slashes to comment
     stage('Deploy'){
       steps{
-       sh './deploystage.sh'
+       //sh './deploystage.sh'
       }
     }
   }
