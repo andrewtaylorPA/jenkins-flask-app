@@ -6,7 +6,7 @@ pipeline {
         script {
           sh 'docker rm -f $(docker ps -a) || True'
           sh 'docker rmi $(docker images) || True'
-          sh 'docker volume rm $(docker volume ls) || True'
+          sh 'docker volume rm $(docker volume ls)'
           sh 'docker builder prune --all --force'
         }
       }
