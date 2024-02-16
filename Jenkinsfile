@@ -11,22 +11,29 @@ pipeline {
         }
       }
     }
-    stage ('Build') {
+    stage ('Build App') {
       steps {
         script {
          sh 'docker build -t flask-app .'
         }
       }
     }
+    stage ('Build Network') {
+      steps {
+        script {
+         sh 'docker network create flask_app_network'
+        }
+      }
+    }
 // 2 slashes to comment
     stage('Deploy Flask App'){
       steps{
-        sh 'docker run -d --name flask-app -e YOUR_NAME=Andrew flask-app'
+        sh 'docker run -d --name flask-app --network flask_app_network -e YOUR_NAME=Andrew flask-app'
       }
     }
     stage('Deploy nginx App'){
       steps{
-        sh 'docker run -d -p 80:80 --name nginx --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf nginx:alpine'
+        sh 'docker run -d -p 80:80 --network flask_app_network --name nginx --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf nginx:alpine'
       }
     }
   }
