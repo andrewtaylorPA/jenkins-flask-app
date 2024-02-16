@@ -21,7 +21,7 @@ pipeline {
     stage ('Build Network') {
       steps {
         script {
-         sh 'docker network create flask_app_network'
+         sh 'docker network create flask_app_network || true'
         }
       }
     }
