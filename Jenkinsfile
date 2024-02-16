@@ -19,10 +19,14 @@ pipeline {
       }
     }
 // 2 slashes to comment
-    stage('Deploy'){
+    stage('Deploy Flask App'){
       steps{
         sh 'docker run -d --name flask-app -e YOUR_NAME=Andrew flask-app'
-        sh 'docker run -d -p 80:80 --name nginx --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf nginx'
+      }
+    }
+    stage('Deploy nginx App'){
+      steps{
+        sh 'docker run -d -p 80:80 --name nginx --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf nginx:alpine'
       }
     }
   }
