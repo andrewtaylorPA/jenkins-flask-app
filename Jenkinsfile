@@ -4,9 +4,9 @@ pipeline {
     stage ('Clean-up') {
       steps {
         script {
-          sh 'docker rm -f $(docker ps -a) || True'
-          sh 'docker rmi $(docker images) || True'
-          sh 'docker volume rm $(docker volume ls)'
+          sh 'docker rm -f $(docker ps -a) || true'
+          sh 'docker rmi $(docker images) || true'
+          sh 'docker volume rm $(docker volume ls) || true'
           sh 'docker builder prune --all --force'
         }
       }
